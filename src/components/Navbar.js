@@ -15,6 +15,7 @@ function Barra_navegacion() {
         <Navbar.Brand as={Link} to="/">TurnoClick</Navbar.Brand>
         <Nav className="me-auto">
           <Nav.Link as={Link} to="/">Inicio</Nav.Link>
+          
           {user ? (
             <>
               <Nav.Link as={Link} to="/perfil">Perfil</Nav.Link>

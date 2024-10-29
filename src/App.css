@@ -50,3 +50,43 @@ body {
   color: blue;
   text-decoration: underline; 
 }
+
+/* Estilos para el formulario de buscar canchas */
+.buscar-canchas {
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  max-width: 600px; /* Ancho máximo */
+  margin: 20px auto; /* Centramos el formulario */
+}
+
+.buscar-canchas h3 {
+  text-align: center; /* Titulo centrado */
+  color: #333; /* Color del texto */
+}
+
+/* Estilos para los select */
+select {
+  width: 100%;
+  padding: 10px; /* Relleno */
+  border: 1px solid #ccc; /* Borde */
+  border-radius: 5px; /* Bordes redondeados */
+  margin-bottom: 10px; /* Espacio entre campos */
+}
+
+/* Estilos para el calendario */
+input[type="date"] {
+  width: 100%;
+  padding: 10px; /* Relleno */
+  border: 1px solid #ccc; /* Borde */
+  border-radius: 5px; /* Bordes redondeados */
+}
+
+/* Estilos para el aviso de no canchas disponibles */
+.no-canchas {
+  text-align: center;
+  color: #ff0000; /* Color rojo para el mensaje */
+  font-weight: bold;
+  margin-top: 20px; /* Margen superior */
+}
