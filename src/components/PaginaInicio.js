@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Form, ListGroup, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import DatePicker from 'react-datepicker'; // Importar el DatePicker
-import 'react-datepicker/dist/react-datepicker.css'; // Importar estilos de DatePicker
+import DatePicker from 'react-datepicker'; 
+import 'react-datepicker/dist/react-datepicker.css'; 
 import '../App.css';
 
 const Inicio = () => {
@@ -13,7 +13,7 @@ const Inicio = () => {
     const [deporteSeleccionado, setDeporteSeleccionado] = useState(null);
     const [mostrarDeportes, setMostrarDeportes] = useState(false);
 
-    const [fechaSeleccionada, setFechaSeleccionada] = useState(null); // Cambiar a null para manejar la fecha
+    const [fechaSeleccionada, setFechaSeleccionada] = useState(null); 
     const [horarioSeleccionado, setHorarioSeleccionado] = useState(null);
 
     const navigate = useNavigate();
