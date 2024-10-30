@@ -3,19 +3,20 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../AuthContext';
 import '../App.css'; 
-import { useAuth } from '../AuthContext'; 
 
 function Barra_navegacion() {
-  const { user, logout } = useAuth(); 
 
+  const { isAuthenticated, logout } = useAuth();
+ 
   return (
     <div className="sidebar">
       <Navbar bg="light" data-bs-theme="light">
         <Navbar.Brand as={Link} to="/">TurnoClick</Navbar.Brand>
         <Nav className="me-auto">
           <Nav.Link as={Link} to="/">Inicio</Nav.Link>
-          {user ? (
+          {isAuthenticated ? (
             <>
               <Nav.Link as={Link} to="/perfil">Perfil</Nav.Link>
               <Button variant="outline-danger" onClick={logout}>

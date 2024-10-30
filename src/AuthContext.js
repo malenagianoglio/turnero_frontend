@@ -3,32 +3,25 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState(null);
+    const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('token'));
 
     useEffect(() => {
-        const storedUser = localStorage.getItem('user');
-        if (storedUser) {
-            try {
-                const parsedUser = JSON.parse(storedUser);
-                setUser(parsedUser);
-            } catch (error) {
-                console.error('Error al parsear el usuario:', error);
-            }
-        }
+        const token = localStorage.getItem('token');
+        setIsAuthenticated(!!token);
     }, []);
 
-    const login = (userData) => {
-        localStorage.setItem('user', JSON.stringify(userData));
-        setUser(userData);
+    const login = (token) => {
+        localStorage.setItem('token', token);
+        setIsAuthenticated(true);
     };
 
     const logout = () => {
-        localStorage.removeItem('user');
-        setUser(null);
+        localStorage.removeItem('token');
+        setIsAuthenticated(false);
     };
 
     return (
-        <AuthContext.Provider value={{ user, login, logout }}>
+        <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
             {children}
         </AuthContext.Provider>
     );

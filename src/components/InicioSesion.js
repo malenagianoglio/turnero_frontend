@@ -1,36 +1,32 @@
 import React, { useState } from 'react';
-import { Form, Button, Alert } from 'react-bootstrap';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../AuthContext'; 
+import { Form, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../AuthContext';
 import '../App.css'; 
 
 const InicioSesion = () => {
     const [email, setEmail] = useState('');
     const [contrasena, setContrasena] = useState('');
-    const [error, setError] = useState(null); 
+    const { login } = useAuth();
     const navigate = useNavigate();
-    const { login } = useAuth(); 
 
     const handleLogin = async (e) => {
         e.preventDefault();
-        setError(null); 
 
         try {
-            const response = await axios.post('http://localhost:8080/api/usuarios/login', {
+            const response = await axios.post('http://localhost:8080/api/login', {
                 email,
                 contrasena,
             });
 
-            if (response.data) {
-                alert('Inicio de sesión exitoso');
-                login(response.data); 
-                navigate('/');
-            }
+            alert(response.data.message);
+            login(response.data.token);
+            navigate('/');
+
         } catch (error) {
-            console.error('Error al iniciar sesión', error);
-            setError('Credenciales incorrectas. Intente de nuevo.'); 
+            alert(error.response.data.error); 
         }
     };
 
@@ -39,7 +35,6 @@ const InicioSesion = () => {
             <div className="login-form">
                 <h2>Iniciar Sesión</h2>
                 <Form onSubmit={handleLogin}>
-                    {error && <Alert variant="danger">{error}</Alert>}
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Label>Correo Electrónico:</Form.Label>
                         <Form.Control 
@@ -69,7 +64,8 @@ const InicioSesion = () => {
                 <p>¿No tienes una cuenta? <Link to="/registro">Regístrate</Link></p>
                 </div>
             </div>
-        </div> 
+        </div>
+         
     );
 };
 

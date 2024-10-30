@@ -27,7 +27,7 @@ const Registro = () => {
 
             if (response.data) {
                 alert('Registro exitoso');
-                navigate('/'); 
+                navigate('/iniciosesion'); 
             }
         } catch (error) {
             console.error('Error al registrarse', error);
