@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Form, ListGroup, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import DatePicker from 'react-datepicker'; 
 import 'react-datepicker/dist/react-datepicker.css'; 
 import '../App.css';
 
@@ -59,7 +58,7 @@ const Inicio = () => {
     const handleSearch = async (e) => {
         e.preventDefault();
         try {
-            const formattedFecha = fechaSeleccionada ? fechaSeleccionada.toISOString().split('T')[0] : null;
+            const formattedFecha = fechaSeleccionada ? new Date(fechaSeleccionada).toISOString().split('T')[0] : null;
 
             const response = await axios.post('http://localhost:8080/api/buscarCanchas', {
                 IdDeporte: deporteSeleccionado.id,
@@ -68,7 +67,7 @@ const Inicio = () => {
             });
 
             const canchasDisponibles = response.data.canchasDisponibles || []; 
-            navigate('/canchas', { state: { resultados: canchasDisponibles } });
+            navigate('/canchas', { state: { resultados: canchasDisponibles, fecha: formattedFecha, horario: horarioSeleccionado } });
 
         } catch (error) {
             console.error('Error al asignar espacio:', error);
@@ -78,10 +77,11 @@ const Inicio = () => {
     return (
         <Container fluid className="background-container">
             <Row className="gradient-container">
-                <Col xs={12} md={7} className="left-column">
+                <Col xs={12} md={6} className="left-column">
                 </Col>
 
-                <Col xs={12} md={5} className="right-column">
+                <Col xs={12} md={6} className="right-column">
+                    <div className='contenedor-form'>
                     <Form onSubmit={handleSearch}>
                         <Form.Group controlId="formDeporte">
                             <Form.Control
@@ -113,13 +113,12 @@ const Inicio = () => {
                         </Form.Group>
 
                         <Form.Group controlId="formFecha">
-                            <DatePicker
-                                selected={fechaSeleccionada}
-                                onChange={(date) => setFechaSeleccionada(date)}
-                                dateFormat="yyyy/MM/dd"
-                                placeholderText="Selecciona una fecha"
+                            <Form.Control
+                                type = "date"
+                                placeholder='Seleccione una fecha'
+                                value = {fechaSeleccionada}
+                                onChange = {(e) => setFechaSeleccionada(e.target.value)}
                                 required
-                                className="form-control" 
                             />
                         </Form.Group>
 
@@ -130,7 +129,7 @@ const Inicio = () => {
                                 onChange={(e) => setHorarioSeleccionado(e.target.value)}
                                 required
                             >
-                                <option value="">Selecciona un horario</option>
+                                <option value="">Seleccione un horario</option>
                                 {opcionesHorarios.map((horario, index) => (
                                     <option key={index} value={horario}>
                                         {horario}
@@ -143,6 +142,7 @@ const Inicio = () => {
                             Buscar
                         </Button>
                     </Form>
+                    </div>
                 </Col>
             </Row>
             <div className="gradient-overlay"></div>

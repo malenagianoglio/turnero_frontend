@@ -1,18 +1,10 @@
-.sidebar{
-  position: fixed; 
-  top: 0; 
-  left: 0; 
-  width: 100%; 
-  z-index: 1000; 
-}
-
 .registrarse,
 .inicio-sesion {
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(to right, #00bb38, #00641e); /* Fondo de degradado */
+  background: linear-gradient(to right, #00bb38, #00641e);
 }
 
 .register-form,
@@ -32,7 +24,7 @@ h2 {
 }
 
 button {
-  transition: background-color 0.3s ease, transform 0.2s ease; /* Transición suave */
+  transition: background-color 0.3s ease, transform 0.2s ease;
   width: 100%; 
 }
 
@@ -46,7 +38,7 @@ button:hover {
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Tipografía más moderna */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
 }
 
 .registro {
@@ -59,13 +51,12 @@ body {
   text-decoration: underline; 
 }
 
-<<<<<<< HEAD
 .background-container {
-  position: relative; /* Para que el degradado se posicione correctamente */
-  height: 100vh; /* Ajusta según lo necesites */
-  overflow: hidden; /* Para evitar desbordamiento */
-  background-image: url('../public/images/fondo.jpg'); /* Reemplaza con la ruta de tu imagen */
-  background-size: contain; /* Asegura que la imagen cubra todo el contenedor */
+  position: relative; 
+  height: 588px; 
+  overflow: hidden; 
+  background-image: url('../public/images/fondo.jpg');
+  background-size: contain; 
   background-position: left center; 
   background-repeat: no-repeat;
   z-index: 0;
@@ -79,12 +70,44 @@ body {
 }
 
 .left-column, .right-column {
-  padding: 150px;
+  padding: 150px 40px !important;
   display: block !important;
   visibility: visible !important;
   opacity: 1 !important;
 }
 
+.contenedor-form {
+  padding: 30px; 
+  background-color: rgb(255, 255, 255); 
+  border-radius: 15px; 
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); 
+}
+
+input[type="text"],
+input[type="date"],  
+select.form-control, 
+.form-control {
+    color: #666666 !important;
+    border: 1px solid #ccc; 
+    border-radius: 5px;
+    padding: 10px; 
+    width: 100%; 
+    transition: border-color 0.3s ease;
+}
+
+
+input[type="text"]:focus, select:focus {
+  border-color: #61897a; 
+  outline: none; 
+}
+
+.contenedor-form .form-group {
+  margin-bottom: 15px; 
+}
+
+.contenedor-form .form-control {
+  margin-bottom: 10px; 
+}
 .gradient-overlay {
   position: absolute;
   top: 0;
@@ -92,8 +115,37 @@ body {
   width: 80%; 
   height: 100%;
   z-index: -1;
-  background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%,  rgba(255, 255, 255, 0.8) 40%, rgba(255, 255, 255, 1) 45%, rgba(255, 255, 255, 1) 100%);
+  background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%,  #61897a 50%, #476e60 75%, #34584b 100%);
 }
+
+
+.titulo-resultados {
+  text-align: center;
+  color: #333;
+  margin-bottom: 2rem;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+}
+
+.resultado-card {
+  border: none;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.resultado-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.no-resultados {
+  text-align: center;
+  color: #868e96;
+  font-size: 1.2rem;
+}
+
+
 
 @media (max-width: 1024px) {
 
@@ -102,7 +154,7 @@ body {
     height: 60vh;
     width: auto;
     overflow: hidden; 
-    background-image: url('../public/images/fondo.jpg'); 
+    background-image: url('../public/images/fondo.jpg');
     background-size: cover; 
     background-position: left center;
     z-index: 0;
@@ -138,44 +190,3 @@ body {
     background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.8) 50%, rgba(255, 255, 255, 1) 100%);
   }
 }
-=======
-/* Estilos para el formulario de buscar canchas */
-.buscar-canchas {
-  padding: 20px;
-  background-color: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-  max-width: 600px; /* Ancho máximo */
-  margin: 20px auto; /* Centramos el formulario */
-}
-
-.buscar-canchas h3 {
-  text-align: center; /* Titulo centrado */
-  color: #333; /* Color del texto */
-}
-
-/* Estilos para los select */
-select {
-  width: 100%;
-  padding: 10px; /* Relleno */
-  border: 1px solid #ccc; /* Borde */
-  border-radius: 5px; /* Bordes redondeados */
-  margin-bottom: 10px; /* Espacio entre campos */
-}
-
-/* Estilos para el calendario */
-input[type="date"] {
-  width: 100%;
-  padding: 10px; /* Relleno */
-  border: 1px solid #ccc; /* Borde */
-  border-radius: 5px; /* Bordes redondeados */
-}
-
-/* Estilos para el aviso de no canchas disponibles */
-.no-canchas {
-  text-align: center;
-  color: #ff0000; /* Color rojo para el mensaje */
-  font-weight: bold;
-  margin-top: 20px; /* Margen superior */
-}
->>>>>>> 428294d199053aa680c69fa32a192184d12180ae

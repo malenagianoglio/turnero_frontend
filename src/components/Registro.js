@@ -18,7 +18,7 @@ const Registro = () => {
         setError(null);
 
         try {
-            const response = await axios.post('http://localhost:8080/api/usuarios', {
+            const response = await axios.post('http://localhost:8080/api/usuarios/register', {
                 nombre, 
                 apellido,
                 email,

@@ -16,14 +16,19 @@ const InicioSesion = () => {
         e.preventDefault();
 
         try {
-            const response = await axios.post('http://localhost:8080/api/login', {
+            const response = await axios.post('http://localhost:8080/api/usuarios/login', {
                 email,
                 contrasena,
             });
 
             alert(response.data.message);
             login(response.data.token);
-            navigate('/');
+            if (response.data.rol === 'Administrador') {
+                navigate('/admin'); // Redirige a la página de administración
+            } else {
+                navigate('/'); // Redirige a la página de inicio de cliente
+            }
+            
 
         } catch (error) {
             alert(error.response.data.error); 
