@@ -134,7 +134,6 @@ const InicioAdmin = () => {
                 </div>
             </div>
 
-            {/* Formulario para editar una cancha seleccionada */}
             {editingCancha && (
                 <div className="row">
                     <div className="col-md-12">

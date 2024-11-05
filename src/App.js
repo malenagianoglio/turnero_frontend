@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar'; 
 import Inicio from './components/PaginaInicio';
-import InicioAdmin from './components/PaginaInicioAdmin';
+import InicioAdmin from './components/Administrador/PaginaInicioAdmi';
 import Usuarios from './components/Usuarios';
 import InicioSesion from './components/InicioSesion';
 import Registro from './components/Registro';
