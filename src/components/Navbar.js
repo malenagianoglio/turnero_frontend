@@ -18,7 +18,7 @@ function Barra_navegacion() {
           <Nav.Link as={Link} to="/">Inicio</Nav.Link>
           {isAuthenticated ? (
             <>
-              <Nav.Link as={Link} to="/perfil">Perfil</Nav.Link>
+              <Nav.Link as={Link} to="/MisReservas">Mis Reservas</Nav.Link>
               <Button variant="outline-danger" onClick={logout}>
                 Cerrar Sesión
               </Button>
