@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Button, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import "../../App.css";
 
 function AltaCancha() {
     const [nombre, setNombre] = useState('');
@@ -53,7 +54,7 @@ function AltaCancha() {
 
     return (
         <Container>
-            <h1>Registrar Nueva Cancha</h1>
+            <h1 className='titulo-nueva-cancha'>Registrar Nueva Cancha</h1>
             <Form onSubmit={handleSubmit}>
                 <Form.Group controlId="formNombre" className="mb-3">
                     <Form.Label>Nombre</Form.Label>

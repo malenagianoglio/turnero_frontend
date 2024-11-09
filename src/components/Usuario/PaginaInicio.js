@@ -3,7 +3,7 @@ import { Container, Row, Col, Form, ListGroup, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import 'react-datepicker/dist/react-datepicker.css'; 
-import '../App.css';
+import '../../App.css';
 
 const Inicio = () => {
     const [deportes, setDeportes] = useState([]);
@@ -30,6 +30,8 @@ const Inicio = () => {
         '19:00',
         '20:00',
     ];
+
+    const fechaMinima = new Date().toISOString().split('T')[0];  
 
     useEffect(() => {
         const fetchData = async () => {
@@ -114,10 +116,11 @@ const Inicio = () => {
 
                         <Form.Group controlId="formFecha">
                             <Form.Control
-                                type = "date"
+                                type="date"
                                 placeholder='Seleccione una fecha'
-                                value = {fechaSeleccionada}
-                                onChange = {(e) => setFechaSeleccionada(e.target.value)}
+                                value={fechaSeleccionada}
+                                onChange={(e) => setFechaSeleccionada(e.target.value)}
+                                min={fechaMinima}  
                                 required
                             />
                         </Form.Group>

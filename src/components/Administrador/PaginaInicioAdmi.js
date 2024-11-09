@@ -13,7 +13,7 @@ const PaginaInicioAdmin = () => {
 
                 <Col xs={12} md={6} className="right-column">
                     <div className='contenedor-form'>
-                        <Link to='/'>
+                        <Link to='/gestioncanchas'>
                             <Button variant='primary' className="mb-3">Gestión de canchas</Button>
                         </Link>
                         <Link to='/'>

@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams} from 'react-router-dom';
 import { Container, Button, Form, Card, Alert } from 'react-bootstrap';
+import "../../App.css";
 
 function CanchaDetalle() {
     const { id } = useParams();
-    const navigate = useNavigate();
     const [cancha, setCancha] = useState(null);
     const [deportes, setDeportes] = useState([]);
-    const [error, setError] = useState(null);
-    const [success, setSuccess] = useState(false);
+    const [alerta, setAlerta] = useState({ mensaje: '', variant: '' });
 
     useEffect(() => {
         fetchCancha();
@@ -22,7 +21,10 @@ function CanchaDetalle() {
             const data = await response.json();
             setCancha(data);
         } catch (error) {
-            setError(error.message);
+            setAlerta({
+                mensaje: 'Error al cargar la cancha',
+                variant: 'danger'
+            });
         }
     };
 
@@ -33,7 +35,10 @@ function CanchaDetalle() {
             const data = await response.json();
             setDeportes(data);
         } catch (error) {
-            setError(error.message);
+            setAlerta({
+                mensaje: 'Error al cargar los deportes',
+                variant: 'danger'
+            });
         }
     };
 
@@ -45,33 +50,43 @@ function CanchaDetalle() {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(cancha),
             });
-            setSuccess(true);
-            setTimeout(() => setSuccess(false), 3000);
-            navigate('/gestioncanchas');
+            setAlerta({
+                mensaje: 'Los datos de la cancha se han actualizado correctamente.',
+                variant: 'success'
+            });
         } catch (error) {
-            setError('Error al actualizar la cancha');
+            setAlerta({
+                mensaje: 'Error al actualizar la cancha',
+                variant: 'danger'
+            });
         }
     };
 
     const handleDelete = async () => {
-        if (window.confirm("¿Estás seguro de que quieres eliminar esta cancha?")) {
-            try {
-                await fetch(`http://localhost:8080/api/canchas/${id}`, {
-                    method: 'DELETE',
-                });
-                alert("La cancha ha sido eliminada.");
-                navigate('/');
-            } catch (error) {
-                setError('Error al eliminar la cancha');
-            }
+        try {
+            await fetch(`http://localhost:8080/api/canchas/${id}`, {
+                method: 'DELETE',
+            });
+            setAlerta({
+                mensaje: 'La cancha ha sido eliminada.',
+                variant: 'success'
+            });
+        } catch (error) {
+            setAlerta({
+                mensaje: 'Error al eliminar la cancha',
+                variant: 'danger'
+            });
         }
     };
 
     return (
         <Container className="mt-5">
-            <h2 className="text-center mb-4">Detalles de la Cancha</h2>
-            {error && <Alert variant="danger">{error}</Alert>}
-            {success && <Alert variant="success">Los datos de la cancha se han actualizado correctamente.</Alert>}
+            <h2 className="titulo-nueva-cancha">Detalles de la Cancha</h2>
+            {alerta.mensaje && (
+                <Alert variant={alerta.variant} onClose={() => setAlerta({ mensaje: '', variant: '' })} dismissible>
+                    {alerta.mensaje}
+                </Alert>
+            )}
             {cancha ? (
                 <Card className="p-4 shadow-sm">
                     <Form onSubmit={handleEdit}>
@@ -111,10 +126,10 @@ function CanchaDetalle() {
                             </Form.Control>
                         </Form.Group>
                         <div className="d-flex justify-content-between">
-                            <Button variant="primary" type="submit">
+                            <Button variant="primary" type="submit" className="mx-2">
                                 Guardar cambios
                             </Button>
-                            <Button variant="danger" onClick={handleDelete}>
+                            <Button variant="danger" onClick={handleDelete} className="mx-2">
                                 Eliminar
                             </Button>
                         </div>

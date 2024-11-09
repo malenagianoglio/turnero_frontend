@@ -1,4 +1,57 @@
-/* orne */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 10px !important;
+  background: linear-gradient(90deg, #34584b 0%, #61897a 100%) !important;
+}
+
+.sidebar .navbar-brand {
+  font-family: 'Roboto', sans-serif; 
+  font-size: 1.6rem;
+  color: #fff; 
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; 
+}
+
+.sidebar .navbar-nav .btn {
+  margin-left: 10px;
+  padding: 5px 15px !important; 
+  font-size: 1rem !important;
+  border-radius: 25px !important;
+  transition: all 0.3s ease !important;
+}
+
+.sidebar .navbar-nav .btn-outline-primary {
+  border-color: #fff !important; 
+  color: #fff !important; 
+  background-color: transparent !important;
+}
+
+.sidebar .navbar-nav .btn-outline-primary:hover {
+  background-color: #34584b !important;
+  border-color: #34584b !important; 
+  color: #fff !important; 
+}
+
+.sidebar .navbar-nav .btn-outline-danger {
+  border-color: #fff !important;
+  color: #fff !important; 
+  background-color: transparent !important;
+  font-weight: bold !important;
+}
+
+.sidebar .navbar-nav .btn-outline-danger:hover {
+  background-color: #e53946 !important;
+  border-color: #e53946 !important;
+  color: #fff !important; 
+}
 
 .registrarse,
 .inicio-sesion {
@@ -6,7 +59,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(to right, #00bb38, #00641e);
+  background: linear-gradient(to right, #61897a, #34584b);
 }
 
 .register-form,
@@ -19,7 +72,7 @@
   width: 100%; 
 }
 
-h2 {
+.login{
   text-align: center; 
   color: #333; 
   font-family: 'Arial', sans-serif; 
@@ -27,11 +80,13 @@ h2 {
 
 button {
   transition: background-color 0.3s ease, transform 0.2s ease;
-  width: 100%; 
+  width: 100%;
+  background-color: #34584b !important;
+  border-color: #34584b !important;
 }
 
 button:hover {
-  background-color: #0056b3; 
+  background-color: #476e60 !important;
 }
 
 .alert {
@@ -40,7 +95,7 @@ button:hover {
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .registro {
@@ -55,7 +110,7 @@ body {
 
 .background-container {
   position: relative; 
-  height: 588px; 
+  height: 100vh; 
   overflow: hidden; 
   background-image: url('../public/images/fondo.jpg');
   background-size: contain; 
@@ -110,6 +165,7 @@ input[type="text"]:focus, select:focus {
 .contenedor-form .form-control {
   margin-bottom: 10px; 
 }
+
 .gradient-overlay {
   position: absolute;
   top: 0;
@@ -120,32 +176,104 @@ input[type="text"]:focus, select:focus {
   background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%,  #61897a 50%, #476e60 75%, #34584b 100%);
 }
 
+.contenedor-resultados {
+  padding: 20px;
+}
 
 .titulo-resultados {
-  text-align: center;
-  color: #333;
-  margin-bottom: 2rem;
   font-family: 'Roboto', sans-serif;
-  font-weight: 700;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #34584b;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  margin: 10px;
+}
+
+.contenedor-opciones-cancha {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-nueva-cancha {
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 25px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-nueva-cancha:hover {
+  background-color: #27ae60;
+}
+
+.no-resultados {
+  font-size: 1.2rem;
+  color: #777;
+  margin-top: 20px;
 }
 
 .resultado-card {
   border: none;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  border-radius: 12px;
-  transition: transform 0.3s, box-shadow 0.3s;
+  transition: transform 0.3s ease;
 }
 
+.resultado-card .text-primary {
+  color: #34584b !important;
+  text-transform: uppercase;
+  background-color: #9ad6c1c2;
+  text-align: center;
+}
 .resultado-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
 }
 
-.no-resultados {
-  text-align: center;
-  color: #868e96;
-  font-size: 1.2rem;
+.resultado-card .btn {
+  font-size: 1.1rem;
+  padding: 10px 15px;
 }
+
+.disabled-card {
+  opacity: 0.6;
+  pointer-events: none; 
+  background-color: #f0f0f0;
+}
+
+.container {
+  padding: 20px;
+}
+
+.container h2.text-center {
+  font-size: 1.75rem;
+  color: #333;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase; 
+}
+
+.titulo-nueva-cancha{
+  font-family: 'Roboto', sans-serif;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #34584b;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+.mt-5.container{
+  margin-top: 10px !important;
+ 
+}
+
+
+
+
+
+
+
+
+
 
 
 

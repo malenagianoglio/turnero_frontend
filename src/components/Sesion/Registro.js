@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
-import '../App.css';
+import '../../App.css';
 
 const Registro = () => {
     const [nombre, setNombre] = useState('');
@@ -38,7 +38,7 @@ const Registro = () => {
     return (
         <div className='registrarse'>
             <div className='register-form'>
-                <h2>Registrarse</h2>
+                <h2 className='login'>Registrarse</h2>
                     <Form onSubmit={handleRegister}>
                         {error && <Alert variant="danger">{error}</Alert>}
                         <Form.Group className="mb-3" controlId="formBasicName">
