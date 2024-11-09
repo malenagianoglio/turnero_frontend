@@ -2,26 +2,45 @@ import React from 'react';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../AuthContext';
-import '../App.css'; 
+import '../App.css';
 
 function Barra_navegacion() {
+  const { isAuthenticated, userRole, logout } = useAuth();
+  const navigate = useNavigate();
 
-  const { isAuthenticated, logout } = useAuth();
- 
+  const handleLogout = () => {
+    logout();
+    navigate('/', { replace: true }); 
+  };
+
   return (
-    <div className="sidebar">
-      <Navbar bg="light" data-bs-theme="light">
-        <Navbar.Brand as={Link} to="/">TurnoClick</Navbar.Brand>
-        <Nav className="me-auto">
-          <Nav.Link as={Link} to="/">Inicio</Nav.Link>
+    <Navbar expand="lg" bg="light" className="sidebar">
+      <Navbar.Brand as={Link} to="/" className="navbar-left">
+        TurnoClick
+      </Navbar.Brand>
+      <Navbar.Toggle aria-controls="navbar-nav" />
+      <Navbar.Collapse id="navbar-nav" className="navbar-center">
+        <Nav className="ms-auto navbar-right">
           {isAuthenticated ? (
             <>
-              <Nav.Link as={Link} to="/perfil">Perfil</Nav.Link>
-              <Button variant="outline-danger" onClick={logout}>
-                Cerrar Sesión
-              </Button>
+              {userRole === 'Cliente' && (
+                <>
+                  <Nav.Link as={Link} to="/misreservas">Mis reservas</Nav.Link>
+                </>
+              )}
+              {userRole === 'Administrador' && (
+                <>
+                  <Nav.Link as={Link} to="/gestioncanchas">Gestión Canchas</Nav.Link>
+                  <Nav.Link as={Link} to="/gestionreservas">Gestión Reservas</Nav.Link>
+                </>
+              )}
+              <div className='boton-cerrar'>
+                <Button variant="outline-danger" onClick={handleLogout}>
+                  Cerrar Sesión
+                </Button>
+              </div>
             </>
           ) : (
             <Button variant="outline-primary" as={Link} to="/iniciosesion">
@@ -29,8 +48,8 @@ function Barra_navegacion() {
             </Button>
           )}
         </Nav>
-      </Navbar>
-    </div>
+      </Navbar.Collapse>
+    </Navbar>
   );
 }
 

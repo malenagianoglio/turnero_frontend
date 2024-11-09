@@ -3,8 +3,8 @@ import axios from 'axios';
 import { Form, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../AuthContext';
-import '../App.css'; 
+import { useAuth } from '../../AuthContext';
+import '../../App.css'; 
 
 const InicioSesion = () => {
     const [email, setEmail] = useState('');
@@ -24,9 +24,9 @@ const InicioSesion = () => {
             alert(response.data.message);
             login(response.data.token);
             if (response.data.rol === 'Administrador') {
-                navigate('/admin'); // Redirige a la página de administración
+                navigate('/admin',  { replace: true });
             } else {
-                navigate('/'); // Redirige a la página de inicio de cliente
+                navigate('/',  { replace: true }); 
             }
             
 
@@ -38,7 +38,7 @@ const InicioSesion = () => {
     return (
         <div className='inicio-sesion'>
             <div className="login-form">
-                <h2>Iniciar Sesión</h2>
+                <h2 className='login'>Iniciar Sesión</h2>
                 <Form onSubmit={handleLogin}>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Label>Correo Electrónico:</Form.Label>

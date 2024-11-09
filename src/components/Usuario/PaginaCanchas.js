@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { Container, Row, Col, Card, Button, Modal } from 'react-bootstrap';
+import { Container, Row, Col, Card, Button, Modal, Alert } from 'react-bootstrap';
 import { useLocation } from 'react-router-dom';
-import { useAuth } from '../AuthContext'; 
+import { useAuth } from '../../AuthContext'; 
 import axios from 'axios';
-import '../App.css';
+import '../../App.css';
 
 const Resultados = () => {
     const location = useLocation();
@@ -11,14 +11,23 @@ const Resultados = () => {
     const [showModal, setShowModal] = useState(false);
     const [canchaSeleccionada, setCanchaSeleccionada] = useState(null);
     const { userId } = useAuth();
-
+    const [showAlert, setShowAlert] = useState(false);
+    const [alertMessage, setAlertMessage] = useState('');
+    const [alertVariant, setAlertVariant] = useState(''); 
+    const [resultadosActualizados, setResultadosActualizados] = useState(resultados);  
     const handleReservar = (cancha) => {
+        if (!userId) {
+            setAlertMessage('Por favor, inicia sesión para realizar una reserva.');
+            setAlertVariant('danger'); 
+            setShowAlert(true);
+            return;
+        }
         setCanchaSeleccionada(cancha);
         setShowModal(true);
     };
 
     const confirmarReserva = async () => {
-        if (!canchaSeleccionada) return; 
+        if (!canchaSeleccionada) return;
 
         try {
             const response = await axios.post('http://localhost:8080/api/nuevareserva', {
@@ -28,22 +37,38 @@ const Resultados = () => {
                 horario_inicio: horario, 
             });
 
-            alert(response.data.message || 'Reserva realizada con éxito');
+            setAlertMessage(response.data.message || 'Reserva realizada con éxito');
+            setAlertVariant('success'); 
+            setShowAlert(true);
             setShowModal(false);
+
+          
+            const nuevosResultados = resultadosActualizados.filter(cancha => cancha.id !== canchaSeleccionada.id);
+            setResultadosActualizados(nuevosResultados); 
+
         } catch (error) {
             console.error('Error al realizar la reserva:', error);
-            alert('Error al realizar la reserva, por favor intenta de nuevo');
+            setAlertMessage('Error al realizar la reserva, por favor intenta de nuevo');
+            setAlertVariant('danger'); 
+            setShowAlert(true);
+            setShowModal(false); 
         }
     };
 
     return (
         <Container fluid className="contenedor-resultados">
+            {showAlert && (
+                <Alert variant={alertVariant} className="alerta" onClose={() => setShowAlert(false)} dismissible>
+                    {alertMessage}
+                </Alert>
+            )}
+
             <Row>
                 <Col>
                     <h2 className="titulo-resultados">Resultados de la Búsqueda</h2>
-                    {resultados.length > 0 ? (
+                    {resultadosActualizados.length > 0 ? (
                         <Row>
-                            {resultados.map((cancha, index) => (
+                            {resultadosActualizados.map((cancha, index) => (
                                 <Col key={index} md={6} lg={4} className="mb-4">
                                     <Card className="resultado-card h-100">
                                         <Card.Body>

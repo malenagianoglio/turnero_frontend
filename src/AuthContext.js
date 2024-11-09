@@ -1,19 +1,19 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { jwtDecode } from 'jwt-decode'; // Cambia aquí
+import { jwtDecode } from 'jwt-decode'; 
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
     const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('token'));
     const [userRole, setUserRole] = useState(null);
-    const [userId, setUserId] = useState(null); // Estado para almacenar el ID del usuario
+    const [userId, setUserId] = useState(null); 
 
     useEffect(() => {
         const token = localStorage.getItem('token');
         if (token) {
-            const decodedToken = jwtDecode(token); // Cambia aquí
-            setUserRole(decodedToken.rol); // Guardamos el rol desde el token
-            setUserId(decodedToken.id); // Guardamos el ID del usuario desde el token
+            const decodedToken = jwtDecode(token); 
+            setUserRole(decodedToken.rol); 
+            setUserId(decodedToken.id); 
             setIsAuthenticated(true);
         } else {
             setIsAuthenticated(false);
@@ -23,16 +23,16 @@ export const AuthProvider = ({ children }) => {
     const login = (token) => {
         localStorage.setItem('token', token);
         setIsAuthenticated(true);
-        const decodedToken = jwtDecode(token); // Cambia aquí
+        const decodedToken = jwtDecode(token); 
         setUserRole(decodedToken.rol);
-        setUserId(decodedToken.id); // Almacena el ID del usuario al iniciar sesión
+        setUserId(decodedToken.id); 
     };
 
     const logout = () => {
         localStorage.removeItem('token');
         setIsAuthenticated(false);
         setUserRole(null);
-        setUserId(null); // Limpia el ID del usuario al cerrar sesión
+        setUserId(null); 
     };
 
     return (
